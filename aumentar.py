@@ -14,8 +14,15 @@ transformaciones = {
     'flip_horizontal': transforms.RandomHorizontalFlip(p=1.0),
     'rotacion': transforms.RandomRotation(20),
     'color_jitter': transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+    'zoom': transforms.RandomResizedCrop(size=(224, 224), scale=(0.8, 1.0)), 
+    'blur': transforms.GaussianBlur(kernel_size=(5, 9), sigma=(0.1, 5)),
+    'affine': transforms.RandomAffine(
+        degrees=15,               # Rotación pequeña
+        translate=(0.1, 0.1),     # Traslación hasta el 10% en ambas direcciones
+        scale=(0.9, 1.1),         # Escalado entre 90% y 110%
+        shear=5                   # Cizallamiento
+    )
 }
-
 # Listar todas las imágenes en la carpeta origen
 imagenes = [img for img in os.listdir(carpeta_origen) if img.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
